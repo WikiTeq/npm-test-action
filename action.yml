@@ -1,0 +1,26 @@
+name: 'NPM ci+test runner'
+description: 'Runs `npm ci` and `npm test`'
+author: 'WikiTeq'
+branding:
+  color: orange
+  icon: play-circle
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v4.0.2
+      with:
+        node-version: 22
+
+    - name: Install npm
+      run: npm i -g npm@10.8.1
+      shell: bash
+
+    - uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: npm ci
+      shell: bash
+
+    - name: Run tests
+      run: npm test
+      shell: bash
